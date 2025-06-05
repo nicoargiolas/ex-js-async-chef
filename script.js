@@ -36,6 +36,14 @@ const getChefBirthday = async (id) => {
         throw new Error(`Non posso recuperare la ricetta ${id}`)
     }
 
+    if (recipe.message) {
+        throw new Error(recipe.message)
+    }
+
+    if (!recipe.userId) {
+        throw new Error(`La ricetta ${id} non ha la proprietà userId`)
+    }
+
     let user;
     try {
         user = await fetchJson(`https://dummyjson.com/users/${userId}`)
@@ -43,10 +51,10 @@ const getChefBirthday = async (id) => {
         throw new Error(`Non posso recuperare l'user ${userId}`)
     }
 
-    return user.birthDate;
+    return recipe;
 }
 
-getChefBirthday(1)
+getChefBirthday(1222222222222)
     .then(birthday => console.log("Data di nascita dello chef:", birthday))
     .catch(error => console.error("Errore:", error.message));
 
@@ -56,6 +64,8 @@ getChefBirthday(1)
 // Attualmente, se la prima richiesta non trova una ricetta, la seconda richiesta potrebbe comunque essere eseguita causando errori a cascata.
 
 // Modifica getChefBirthday(id) per intercettare eventuali errori prima di fare la seconda richiesta.
+
+
 // 🎯 Bonus 2
 
 // Utilizza la libreria dayjs per formattare la data di nascita nel formato giorno/mese/anno.
