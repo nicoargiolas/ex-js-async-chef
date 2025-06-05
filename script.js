@@ -59,7 +59,7 @@ const getChefBirthday = async (id) => {
         throw new Error(`La data di nascita dello chef ${userId} non è specificata`)
     }
 
-    return user.birthDate;
+    return dayjs(user.birthDate).format('DD/MM/YYYY');
 }
 
 getChefBirthday(1)
