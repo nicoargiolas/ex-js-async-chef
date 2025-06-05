@@ -51,10 +51,18 @@ const getChefBirthday = async (id) => {
         throw new Error(`Non posso recuperare l'user ${userId}`)
     }
 
-    return recipe;
+    if (user.message) {
+        throw new Error(user.message)
+    }
+
+    if (!user.birthDate) {
+        throw new Error(`La data di nascita dello chef ${userId} non è specificata`)
+    }
+
+    return user.birthDate;
 }
 
-getChefBirthday(1222222222222)
+getChefBirthday(1)
     .then(birthday => console.log("Data di nascita dello chef:", birthday))
     .catch(error => console.error("Errore:", error.message));
 
