@@ -66,9 +66,18 @@ const getChefBirthday = async (id) => {
     return dayjs(user.birthDate).format('DD/MM/YYYY');
 }
 
-getChefBirthday(1)
-    .then(birthday => console.log("Data di nascita dello chef:", birthday))
-    .catch(error => console.error("Errore:", error.message));
+// getChefBirthday(1)
+//     .then(birthday => console.log("Data di nascita dello chef:", birthday))
+//     .catch(error => console.error("Errore:", error.message));
+
+(async () => {
+    try {
+        const birthday = await getChefBirthday(1);
+        console.log("Data di nascita dello chef:", birthday);
+    } catch (error) {
+        console.error("Errore:", error.message);
+    }
+})();
 
 
 // 🎯 Bonus 1
