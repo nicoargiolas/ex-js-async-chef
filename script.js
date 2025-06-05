@@ -20,17 +20,19 @@
 
 // Data di nascita dello chef: 1990-06-15
 
-async function fetchJson(url) {
-    const response = await fetch(url);
-    const obj = await response.json();
-    return obj
-}
+// async function fetchJson(url) {
+//     const response = await fetch(url);
+//     const obj = await response.json();
+//     return obj
+// }
 
 const getChefBirthday = async (id) => {
     let recipe;
     let userId;
     try {
-        recipe = await fetchJson(`https://dummyjson.com/recipes/${id}`);
+        const response = await fetch(`https://dummyjson.com/recipes/${id}`);
+        recipe = await response.json();
+        // recipe = await fetchJson(`https://dummyjson.com/recipes/${id}`);
         userId = recipe.userId;
     } catch (error) {
         throw new Error(`Non posso recuperare la ricetta ${id}`)
@@ -46,7 +48,9 @@ const getChefBirthday = async (id) => {
 
     let user;
     try {
-        user = await fetchJson(`https://dummyjson.com/users/${userId}`)
+        const response = await fetch(`https://dummyjson.com/users/${userId}`);
+        user = await response.json();
+        // user = await fetchJson(`https://dummyjson.com/users/${userId}`)
     } catch (error) {
         throw new Error(`Non posso recuperare l'user ${userId}`)
     }
